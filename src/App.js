@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Routes, Route } from "react-router-dom";
+import Home from "./Pages/Home";
+import Profile from "./Pages/Profile";
+import UserLists from "./Pages/UserLists";
+import ErrorPage from "./Pages/ErrorPage";
+import NavBar from "./Components/NavBar";
 
 function App() {
+  const Persons = [
+    {id:1, name: "Eya", age: 25, Adresse: "Hammem Chat" },
+    {id:2, name: "Walid", age: 19, Adresse: "Algérie" },
+    {id:3, name: "Fayçel", age: 35, Adresse: "Tunis" },
+  ];
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar />
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/Profile/:iddUser" element={<Profile Persons={Persons} />} />
+        <Route path="/UserLists" element={<UserLists Persons={Persons} />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
     </div>
   );
 }
